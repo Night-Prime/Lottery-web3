@@ -18,6 +18,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         subscriptionId = transactionReceipt.events[0].args.subId;
         // Fund the Subscription
         await vrfCoordinatorV2Mock.fundSubscription(subscriptionId, VRF_SUB_FUND_AMOUNT);
+        await vrfCoordinatorV2Mock.addConsumer(subscriptionId, raffle.address);
     } else {
         vrfCoordinatorV2Address = networkConfig[chainId]["vrfCoordinatorV2"];
         subscriptionId = networkConfig[chainId["subscriptionId"]];
